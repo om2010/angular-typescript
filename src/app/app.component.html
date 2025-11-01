@@ -7,17 +7,29 @@
       <div class="card-body">
         <div class="row">
           <div class="col-12">
-            <table>
+            <table class="table table-bordered">
               <thead>
                 <tr>
                   <th>Sr No</th>
                   <th>Name</th>
                   <th>Contact No</th>
                   <th>Email Id</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                <!-- Employee data rows will go here -->
+                @for (item of employeeList; track $index) {
+                  <tr>
+                    <td>{{$index+1}} </td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.contactNumber}}</td>
+                    <td>{{item.emailId}}</td>
+                    <td>
+                      <button class="btn btn-warning" (click)="onEdit(item)">Edit</button>  
+                      <button class="btn btn-danger mx-2" (click)="onDelete(item.empId)">Delete</button>
+                    </td>
+                  </tr>
+                }
               </tbody>
             </table>
           </div>
@@ -31,63 +43,62 @@
       <h5>New Employee</h5>
     </div>
     <div class="card-body">
+      <form [formGroup]="emplyoeeFrom">
       <div class="row">
-    <div class="row">
-    <div class="col-12">
-    <div class="mb-3">
-      <label for="name" class="form-label">Name</label>
-      <input type="text" class="form-control" id="name" placeholder="Enter Name">
-    </div>
-  </div>
-  <div class="col-6">
-    <div class="mb-3">
-      <label for="empId" class="form-label">Employee ID</label>
-      <input type="text" class="form-control" id="empId" placeholder="Enter Employee ID">
-    </div>
-  </div>
-  <div class="col-6">
-    <div class="mb-3">
-      <label for="city" class="form-label">City</label>
-      <input type="text" class="form-control" id="city" placeholder="Enter City">
-    </div>
-  </div>
-  <div class="col-6">
-    <div class="mb-3">
-      <label for="state" class="form-label">State</label>
-      <input type="text" class="form-control" id="state" placeholder="Enter State">
-    </div>
-  </div>
-  <div class="col-6">
-    <div class="mb-3">
-      <label for="emailId" class="form-label">Email ID</label>
-      <input type="email" class="form-control" id="emailId" placeholder="Enter Email ID">
-    </div>
-  </div>
-  <div class="col-6">
-    <div class="mb-3">
-      <label for="contactNumber" class="form-label">Contact Number</label>
-      <input type="tel" class="form-control" id="contactNumber" placeholder="Enter Contact Number">
-    </div>
-  </div>
-  <div class="col-6">
-    <div class="mb-3">
-      <label for="pinCode" class="form-label">Pin Code</label>
-      <input type="text" class="form-control" id="pinCode" placeholder="Enter Pin Code">
-    </div>
-  </div>
-   <div class="col-12">
-    <div class="mb-3">
-      <label for="address" class="form-label">Address</label>
-      <textarea type="text" class="form-control" id="address" placeholder="Enter Address"></textarea>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-6"><button class="btn btn-secondary">Rest</button></div>
-    <div class="col-6"><button type="submit" class="btn btn-primary">Add Employee</button></div>
-  </div>
-</div>
-
+      <div class="row">
+      <div class="col-12">
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" formControlName="name" class="form-control" id="name" placeholder="Enter Name">
       </div>
+      </div>
+      <div class="col-6">
+        <div class="mb-3">
+          <label for="city" class="form-label">City</label>
+          <input type="text" formControlName="city" class="form-control" id="city" placeholder="Enter City">
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="mb-3">
+          <label for="state" class="form-label">State</label>
+          <input type="text" formControlName="state" class="form-control" id="state" placeholder="Enter State">
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="mb-3">
+          <label for="emailId" class="form-label">Email ID</label>
+          <input type="email" formControlName="emailId" class="form-control" id="emailId" placeholder="Enter Email ID">
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="mb-3">
+          <label for="contactNumber" class="form-label">Contact Number</label>
+          <input type="tel" formControlName="contactNumber" class="form-control" id="contactNumber" placeholder="Enter Contact Number">
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="mb-3">
+          <label for="pinCode" class="form-label">Pin Code</label>
+          <input type="text" formControlName="pinCode" class="form-control" id="pinCode" placeholder="Enter Pin Code">
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="mb-3">
+          <label for="address" class="form-label">Address</label>
+          <textarea type="text" formControlName="address" class="form-control" id="address" placeholder="Enter Address"></textarea>
+        </div>
+      </div>
+      <div class="row">
+        @if (emplyoeeFrom.controls["empId"].value == "1") {
+        <div class="col-6"><button type="submit" class="btn btn-primary" (click)="saveData()">Add Employee</button></div>
+        }
+        @else {
+          <div class="col-6"><button type="submit" class="btn btn-secondary" (click)="updateData()">Update Employee</button></div>
+        }
+      </div>
+      </div>
+      </div>
+      </form>
     </div>
   </div>
 </div>

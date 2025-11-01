@@ -1,4 +1,4 @@
-export class employeeModel{
+export class EmployeeModel{
     empId:number;
     name:string;
     city:string;
@@ -12,7 +12,7 @@ export class employeeModel{
     this.city="";
     this.contactNumber="";
     this.emailId="";
-    this.empId=0;
+    this.empId=1;
     this.name="";
     this.state="";
     this.pinCode="";
